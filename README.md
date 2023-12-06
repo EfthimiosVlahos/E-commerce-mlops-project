@@ -21,16 +21,43 @@ Through this project, I aim to showcase:
 - The ease and efficiency of building and deploying machine learning pipelines to handle real-world data and scenarios.
 
 # Setting Up the Python Environment <a id="setting-up-the-python-environment"></a>
+Within the Python environment of your choice, run:
+```bash
+git clone https://github.com/zenml-io/zenml-projects.git
+cd zenml-projects/customer-satisfaction
+pip install -r requirements.txt
+```
 
-To embark on this journey of predictive modeling in e-commerce, I started by setting up the necessary Python environment. I cloned the ZenML repository and installed all the required Python packages. This foundational step was crucial in preparing my workspace for the tasks ahead.
+Starting with ZenML 0.20.0, ZenML comes bundled with a React-based dashboard. This dashboard allows you
+to observe your stacks, stack components and pipeline DAGs in a dashboard interface. To access this, you need to [launch the ZenML Server and Dashboard locally](https://docs.zenml.io/user-guide/starter-guide#explore-the-dashboard), but first you must install the optional dependencies for the ZenML server:
 
-One of the standout features in ZenML, starting from version 0.20.0, is its React-based dashboard. This feature significantly enhanced my ability to monitor and manage the project's pipelines. The dashboard offers an intuitive interface for observing pipeline stacks, components, and the flow of data and operations within the pipeline DAGs. 
+```bash
+pip install zenml["server"]
+zenml up
+```
 
-To utilize this dashboard for a more comprehensive project overview, I installed the optional dependencies for the ZenML server and launched it locally. This allowed me to explore my project's architecture visually and manage it more effectively.
+If you are running the `run_deployment.py` script, you will also need to install some integrations using ZenML:
+
+```bash
+zenml integration install mlflow -y
+```
 
 Furthermore, running the `run_deployment.py` script in this project required specific integrations with ZenML. I ensured that these integrations, particularly MLflow, were correctly installed. MLflow is integral to this project, as it serves as both the experiment tracker and model deployer within the ZenML stack. 
 
+```bash
+zenml integration install mlflow -y
+```
+
 Configuring the ZenML stack with MLflow components was a straightforward process. I registered the MLflow experiment tracker and model deployer and then set up a new stack with these components. This setup was vital for the successful execution of the project, as it enabled me to track experiments, log metrics, and deploy models seamlessly.
+
+The project can only be executed with a ZenML stack that has an MLflow experiment tracker and model deployer as a component. Configuring a new stack with the two components are as follows:
+
+```bash
+zenml integration install mlflow -y
+zenml experiment-tracker register mlflow_tracker --flavor=mlflow
+zenml model-deployer register mlflow --flavor=mlflow
+zenml stack register mlflow_stack -a default -o default -d mlflow -e mlflow_tracker --set
+```
 
 Through these steps, I've established a robust environment tailored to the needs of my project, leveraging the power of ZenML and MLflow to build a scalable and efficient machine learning workflow.
 
@@ -58,6 +85,8 @@ Beyond the standard training, I've crafted a `deployment_pipeline.py` that exten
 The deployment pipeline leverages ZenML's MLflow tracking for logging hyperparameters, model details, and evaluation metrics. This setup enables the local MLflow deployment server to automatically update and serve the latest model that meets our accuracy thresholds, creating a dynamic and responsive system.
 
 Through this project, I've demonstrated not just my technical skills in machine learning but also my ability to create and manage a robust, real-world applicable data science workflow. It reflects my commitment to blending technical expertise with practical business solutions.
+
+To round it off, we deploy a Streamlit application that consumes the latest model service asynchronously from the pipeline logic. This can be done easily with ZenML within the Streamlit code:
 
 ```python
 service = prediction_service_loader(
