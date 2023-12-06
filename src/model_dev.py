@@ -1,9 +1,9 @@
 import logging
 from abc import ABC, abstractmethod
 
-# import optuna
+import optuna
 import pandas as pd
-# import xgboost as xgb
+import xgboost as xgb
 # from lightgbm import LGBMRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
@@ -57,22 +57,22 @@ class RandomForestModel(Model):
         reg = self.train(x_train, y_train, n_estimators=n_estimators, max_depth=max_depth, min_samples_split=min_samples_split)
         return reg.score(x_test, y_test)
 
-class LightGBMModel(Model):
-    """
-    LightGBMModel that implements the Model interface.
-    """
+# class LightGBMModel(Model):
+#     """
+#     LightGBMModel that implements the Model interface.
+#     """
 
-    def train(self, x_train, y_train, **kwargs):
-        reg = LGBMRegressor(**kwargs)
-        reg.fit(x_train, y_train)
-        return reg
+#     def train(self, x_train, y_train, **kwargs):
+#         reg = LGBMRegressor(**kwargs)
+#         reg.fit(x_train, y_train)
+#         return reg
 
-    def optimize(self, trial, x_train, y_train, x_test, y_test):
-        n_estimators = trial.suggest_int("n_estimators", 1, 200)
-        max_depth = trial.suggest_int("max_depth", 1, 20)
-        learning_rate = trial.suggest_uniform("learning_rate", 0.01, 0.99)
-        reg = self.train(x_train, y_train, n_estimators=n_estimators, learning_rate=learning_rate, max_depth=max_depth)
-        return reg.score(x_test, y_test)
+#     def optimize(self, trial, x_train, y_train, x_test, y_test):
+#         n_estimators = trial.suggest_int("n_estimators", 1, 200)
+#         max_depth = trial.suggest_int("max_depth", 1, 20)
+#         learning_rate = trial.suggest_uniform("learning_rate", 0.01, 0.99)
+#         reg = self.train(x_train, y_train, n_estimators=n_estimators, learning_rate=learning_rate, max_depth=max_depth)
+#         return reg.score(x_test, y_test)
 
 
 class XGBoostModel(Model):

@@ -4,7 +4,7 @@ import mlflow
 import pandas as pd
 from src.model_dev import (
     HyperparameterTuner,
-    LightGBMModel,
+    # LightGBMModel,
     LinearRegressionModel,
     RandomForestModel,
     XGBoostModel,
@@ -41,7 +41,7 @@ def train_model(
 
         if config.model_name == "lightgbm":
             mlflow.lightgbm.autolog()
-            model = LightGBMModel()
+            # model = LightGBMModel()
         elif config.model_name == "randomforest":
             mlflow.sklearn.autolog()
             model = RandomForestModel()
