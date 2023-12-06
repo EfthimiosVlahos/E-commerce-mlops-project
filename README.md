@@ -8,6 +8,7 @@
     - [Training Pipeline](#training-pipeline)
     - [Deployment Pipeline](#deployment-pipeline)
 4. [Diving into the Code](#diving-into-the-code)
+5. [Conclusion](#conclusion)
 
 # Project Overview <a id="project-overview"></a>
 In my latest project, I've taken up the intriguing challenge of predicting customer satisfaction for e-commerce purchases using historical data. I'm utilizing the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), which encompasses over 100,000 orders from 2016 to 2018 across various Brazilian marketplaces. This dataset is a goldmine of information, providing insights into order status, pricing, payment methods, freight performance, customer locations, product attributes, and most importantly, customer reviews.
@@ -100,6 +101,8 @@ service.predict(...)  # Predict on incoming data from the application
 
 While this ZenML Project trains and deploys a model locally, other ZenML integrations such as the [Seldon](https://github.com/zenml-io/zenml/tree/main/examples/seldon_deployment) deployer can also be used in a similar manner to deploy the model in a more production setting (such as on a Kubernetes cluster). We use MLflow here for the convenience of its local deployment.
 
+![training_and_deployment_pipeline](_assets/training_and_deployment_pipeline_updated.png)
+
 # Diving into the Code <a id="diving-into-the-code"></a>
 
 You can run two pipelines as follows:
@@ -115,3 +118,16 @@ python run_pipeline.py
 ```bash
 python run_deployment.py
 ```
+
+# Conclusion <a id="conclusion"></a>
+
+As I reflect on the completion of this project, I am struck by the profound learning journey it has taken me on, particularly in the realms of Machine Learning Operations (MLOps), ZenML, and the entire MLOps lifecycle. This project was not just about predicting customer satisfaction in e-commerce; it was a deep dive into the intricate processes that underpin effective machine learning in practice.
+
+Throughout this endeavor, I have gained invaluable experience in navigating the MLOps landscape, a field that stands at the crossroads of machine learning and operational excellence. The practical application of concepts such as continuous integration, continuous deployment, and model monitoring has been enlightening. It has offered me a holistic view of how machine learning models can be developed, deployed, and managed efficiently in a real-world setting.
+
+The use of ZenML has been instrumental in this learning curve. It provided an intuitive and powerful framework that simplified the complexity of MLOps. The ability to construct, manage, and scale machine learning pipelines seamlessly has been a pivotal aspect of this project. ZenML’s integration with tools like MLflow further enriched my understanding of model tracking, versioning, and deployment, ensuring that the models I developed were not only accurate but also robust and deployable.
+
+This project has also been an exploration of the entire MLOps lifecycle, from data ingestion and preprocessing to model training, evaluation, and deployment. Each stage brought its own challenges and learnings, contributing to a comprehensive understanding of the end-to-end process. It underscored the importance of maintaining quality and efficiency at each step to ensure the overall success of a machine learning project.
+
+In conclusion, this project has been more than an academic or technical exercise; it has been a transformative experience that has equipped me with essential skills in MLOps. It has deepened my understanding of how to effectively deploy machine learning models and manage their lifecycle in production environments. I am eager to apply these insights in future projects and continue my journey in the ever-evolving field of machine learning and MLOps.
+
