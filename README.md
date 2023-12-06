@@ -1,85 +1,53 @@
-# Predicting how a customer will feel about a product before they even ordered it
+# Predicting Customer Satisfaction in E-Commerce Before the Order
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/zenml)](https://pypi.org/project/zenml/)
+In my latest project, I've taken up the intriguing challenge of predicting customer satisfaction for e-commerce purchases using historical data. I'm utilizing the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), which encompasses over 100,000 orders from 2016 to 2018 across various Brazilian marketplaces. This dataset is a goldmine of information, providing insights into order status, pricing, payment methods, freight performance, customer locations, product attributes, and most importantly, customer reviews.
 
-**Problem statement**: For a given customer's historical data, we are tasked to predict the review score for the next order or purchase. We will be using the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). This dataset has information on 100,000 orders from 2016 to 2018 made at multiple marketplaces in Brazil. Its features allow viewing charges from various dimensions: from order status, price, payment, freight performance to customer location, product attributes and finally, reviews written by customers. The objective here is to predict the customer satisfaction score for a given order based on features like order status, price, payment, etc. In order to achieve this in a real-world scenario, we will be using [ZenML](https://zenml.io/) to build a production-ready pipeline to predict the customer satisfaction score for the next order or purchase.
+The goal of my project is to forecast the customer satisfaction score for future orders based on these multifaceted features. To achieve this in a real-world scenario, I've employed [ZenML](https://zenml.io/), an innovative tool to create a production-ready pipeline for predicting these satisfaction scores. This repository serves as a demonstration of how [ZenML](https://github.com/zenml-io/zenml), in combination with [MLflow](https://mlflow.org/), can be leveraged to build and deploy efficient and scalable machine learning pipelines.
 
-The purpose of this repository is to demonstrate how [ZenML](https://github.com/zenml-io/zenml) empowers your business to build and deploy machine learning pipelines in a multitude of ways:
+Through this project, I aim to showcase:
 
-- By offering you a framework and template to base your own work on.
-- By integrating with tools like [MLflow](https://mlflow.org/) for deployment, tracking and more
-- By allowing you to build and deploy your machine learning pipelines easily
+- My ability to utilize ZenML as a foundational framework for machine learning projects.
+- The integration of MLflow for streamlined deployment and effective tracking of machine learning models.
+- The ease and efficiency of building and deploying machine learning pipelines to handle real-world data and scenarios.
 
-## :snake: Python Requirements
+## Setting Up the Python Environment for My Project
 
-Let's jump into the Python packages you need. Within the Python environment of your choice, run:
+To embark on this journey of predictive modeling in e-commerce, I started by setting up the necessary Python environment. I cloned the ZenML repository and installed all the required Python packages. This foundational step was crucial in preparing my workspace for the tasks ahead.
 
-```bash
-git clone https://github.com/zenml-io/zenml-projects.git
-cd zenml-projects/customer-satisfaction
-pip install -r requirements.txt
-```
+One of the standout features in ZenML, starting from version 0.20.0, is its React-based dashboard. This feature significantly enhanced my ability to monitor and manage the project's pipelines. The dashboard offers an intuitive interface for observing pipeline stacks, components, and the flow of data and operations within the pipeline DAGs. 
 
-Starting with ZenML 0.20.0, ZenML comes bundled with a React-based dashboard. This dashboard allows you
-to observe your stacks, stack components and pipeline DAGs in a dashboard interface. To access this, you need to [launch the ZenML Server and Dashboard locally](https://docs.zenml.io/user-guide/starter-guide#explore-the-dashboard), but first you must install the optional dependencies for the ZenML server:
+To utilize this dashboard for a more comprehensive project overview, I installed the optional dependencies for the ZenML server and launched it locally. This allowed me to explore my project's architecture visually and manage it more effectively.
 
-```bash
-pip install zenml["server"]
-zenml up
-```
+Furthermore, running the `run_deployment.py` script in this project required specific integrations with ZenML. I ensured that these integrations, particularly MLflow, were correctly installed. MLflow is integral to this project, as it serves as both the experiment tracker and model deployer within the ZenML stack. 
 
-If you are running the `run_deployment.py` script, you will also need to install some integrations using ZenML:
+Configuring the ZenML stack with MLflow components was a straightforward process. I registered the MLflow experiment tracker and model deployer and then set up a new stack with these components. This setup was vital for the successful execution of the project, as it enabled me to track experiments, log metrics, and deploy models seamlessly.
 
-```bash
-zenml integration install mlflow -y
-```
+Through these steps, I've established a robust environment tailored to the needs of my project, leveraging the power of ZenML and MLflow to build a scalable and efficient machine learning workflow.
 
-The project can only be executed with a ZenML stack that has an MLflow experiment tracker and model deployer as a component. Configuring a new stack with the two components are as follows:
+## :thumbsup: My Solution for Predicting Customer Satisfaction
 
-```bash
-zenml integration install mlflow -y
-zenml experiment-tracker register mlflow_tracker --flavor=mlflow
-zenml model-deployer register mlflow --flavor=mlflow
-zenml stack register mlflow_stack -a default -o default -d mlflow -e mlflow_tracker --set
-```
+In my pursuit to build a practical workflow for predicting customer satisfaction scores, I realized that merely training a model once wouldn't suffice. Instead, I've developed an end-to-end pipeline that not only predicts but also continuously updates and deploys the machine learning model. This approach ensures that the business can utilize the latest model for informed decision-making.
 
-## 📙 Resources & References
+This pipeline, designed to be flexible and scalable, can be deployed to the cloud and adapted according to the project's evolving needs. It meticulously tracks every aspect of the process, from raw data inputs to the model parameters and prediction outputs, ensuring comprehensive monitoring and analysis.
 
-We had written a blog that explains this project in-depth: [Predicting how a customer will feel about a product before they even ordered it](https://blog.zenml.io/customer_satisfaction/).
-
-If you'd like to watch the video that explains the project, you can watch the [video](https://youtu.be/L3_pFTlF9EQ).
-
-## :thumbsup: The Solution
-
-In order to build a real-world workflow for predicting the customer satisfaction score for the next order or purchase (which will help make better decisions), it is not enough to just train the model once.
-
-Instead, we are building an end-to-end pipeline for continuously predicting and deploying the machine learning model, alongside a data application that utilizes the latest deployed model for the business to consume.
-
-This pipeline can be deployed to the cloud, scale up according to our needs, and ensure that we track the parameters and data that flow through every pipeline that runs. It includes raw data input, features, results, the machine learning model and model parameters, and prediction outputs. ZenML helps us to build such a pipeline in a simple, yet powerful, way.
-
-In this Project, we give special consideration to the [MLflow integration](https://github.com/zenml-io/zenml/tree/main/examples) of ZenML. In particular, we utilize MLflow tracking to track our metrics and parameters, and MLflow deployment to deploy our model. We also use [Streamlit](https://streamlit.io/) to showcase how this model will be used in a real-world setting.
+In this project, I've placed particular emphasis on the [MLflow integration](https://github.com/zenml-io/zenml/tree/main/examples) within ZenML. Utilizing MLflow, I've managed to track key metrics and parameters effectively, and its deployment capabilities allowed for seamless model implementation. Moreover, I've incorporated [Streamlit](https://streamlit.io/) to demonstrate the real-world application of the model, offering a glimpse into how it can be utilized in a business context.
 
 ### Training Pipeline
 
-Our standard training pipeline consists of several steps:
+The training pipeline I've designed encompasses several critical steps:
 
-- `ingest_data`: This step will ingest the data and create a `DataFrame`.
-- `clean_data`: This step will clean the data and remove the unwanted columns.
-- `train_model`: This step will train the model and save the model using [MLflow autologging](https://www.mlflow.org/docs/latest/tracking.html).
-- `evaluation`: This step will evaluate the model and save the metrics -- using MLflow autologging -- into the artifact store.
+- `ingest_data`: Responsible for data ingestion and DataFrame creation.
+- `clean_data`: Cleans the data, ensuring its quality and relevance.
+- `train_model`: Focuses on training the model, with MLflow autologging used for saving.
+- `evaluation`: Evaluates the model and logs metrics using MLflow autologging.
 
 ### Deployment Pipeline
 
-We have another pipeline, the `deployment_pipeline.py`, that extends the training pipeline, and implements a continuous deployment workflow. It ingests and processes input data, trains a model and then (re)deploys the prediction server that serves the model if it meets our evaluation criteria. The criteria that we have chosen is a configurable threshold on the [MSE](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) of the training. The first four steps of the pipeline are the same as above, but we have added the following additional ones:
+Beyond the standard training, I've crafted a `deployment_pipeline.py` that extends the initial process. This pipeline not only processes and trains the model but also deploys it as a prediction server, subject to meeting predefined evaluation criteria. This criteria, based on the [MSE](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html), ensures only high-performing models are deployed.
 
-- `deployment_trigger`: The step checks whether the newly trained model meets the criteria set for deployment.
-- `model_deployer`: This step deploys the model as a service using MLflow (if deployment criteria is met).
+The deployment pipeline leverages ZenML's MLflow tracking for logging hyperparameters, model details, and evaluation metrics. This setup enables the local MLflow deployment server to automatically update and serve the latest model that meets our accuracy thresholds, creating a dynamic and responsive system.
 
-In the deployment pipeline, ZenML's MLflow tracking integration is used for logging the hyperparameter values and the trained model itself and the model evaluation metrics -- as MLflow experiment tracking artifacts -- into the local MLflow backend. This pipeline also launches a local MLflow deployment server to serve the latest MLflow model if its accuracy is above a configured threshold.
-
-The MLflow deployment server runs locally as a daemon process that will continue to run in the background after the example execution is complete. When a new pipeline is run which produces a model that passes the accuracy threshold validation, the pipeline automatically updates the currently running MLflow deployment server to serve the new model instead of the old one.
-
-To round it off, we deploy a Streamlit application that consumes the latest model service asynchronously from the pipeline logic. This can be done easily with ZenML within the Streamlit code:
+Through this project, I've demonstrated not just my technical skills in machine learning but also my ability to create and manage a robust, real-world applicable data science workflow. It reflects my commitment to blending technical expertise with practical business solutions.
 
 ```python
 service = prediction_service_loader(
@@ -92,8 +60,6 @@ service.predict(...)  # Predict on incoming data from the application
 ```
 
 While this ZenML Project trains and deploys a model locally, other ZenML integrations such as the [Seldon](https://github.com/zenml-io/zenml/tree/main/examples/seldon_deployment) deployer can also be used in a similar manner to deploy the model in a more production setting (such as on a Kubernetes cluster). We use MLflow here for the convenience of its local deployment.
-
-![training_and_deployment_pipeline](_assets/training_and_deployment_pipeline_updated.png)
 
 ## :notebook: Diving into the code
 
@@ -110,37 +76,3 @@ python run_pipeline.py
 ```bash
 python run_deployment.py
 ```
-
-## 🕹 Demo Streamlit App
-
-There is a live demo of this project using [Streamlit](https://streamlit.io/) which you can find [here](https://share.streamlit.io/ayush714/customer-satisfaction/main). It takes some input features for the product and predicts the customer satisfaction rate using the latest trained models. If you want to run this Streamlit app in your local system, you can run the following command:-
-
-```bash
-streamlit run streamlit_app.py
-```
-
-## :question: FAQ
-
-1. When running the continuous deployment pipeline, I get an error stating: `No Step found for the name mlflow_deployer`.
-
-   Solution: It happens because your artifact store is overridden after running the continuous deployment pipeline. So, you need to delete the artifact store and rerun the pipeline. You can get the location of the artifact store by running the following command:
-
-   ```bash
-   zenml artifact-store describe
-   ```
-
-   and then you can delete the artifact store with the following command:
-
-   **Note**: This is a dangerous / destructive command! Please enter your path carefully, otherwise it may delete other folders from your computer.
-
-   ```bash
-   rm -rf PATH
-   ```
-
-2. When running the continuous deployment pipeline, I get the following error: `No Environment component with name mlflow is currently registered.`
-
-   Solution: You forgot to install the MLflow integration in your ZenML environment. So, you need to install the MLflow integration by running the following command:
-
-   ```bash
-   zenml integration install mlflow -y
-   ```
