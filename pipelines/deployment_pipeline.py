@@ -212,6 +212,6 @@ def inference_pipeline(pipeline_name: str, pipeline_step_name: str):
     model_deployment_service = prediction_service_loader(
         pipeline_name=pipeline_name,
         pipeline_step_name=pipeline_step_name,
-        running=False,
+        running=True,
     )
     predictor(service=model_deployment_service, data=batch_data)
