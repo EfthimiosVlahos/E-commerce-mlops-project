@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 import pandas as pd
-from materializer.custom_materializer import cs_materializer
+# from materializer.custom_materializer import cs_materializer
 from steps.clean_data import clean_data
 from steps.evaluation import evaluation
 from steps.ingest_data import ingest_data
