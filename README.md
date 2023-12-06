@@ -1,5 +1,15 @@
 # Predicting Customer Satisfaction in E-Commerce Before the Order
 
+# Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Setting Up the Python Environment](#setting-up-the-python-environment)
+3. [Solution Overview](#solution-overview)
+    - [Training Pipeline](#training-pipeline)
+    - [Deployment Pipeline](#deployment-pipeline)
+4. [Diving into the Code](#diving-into-the-code)
+
+# Project Overview <a id="project-overview"></a>
 In my latest project, I've taken up the intriguing challenge of predicting customer satisfaction for e-commerce purchases using historical data. I'm utilizing the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), which encompasses over 100,000 orders from 2016 to 2018 across various Brazilian marketplaces. This dataset is a goldmine of information, providing insights into order status, pricing, payment methods, freight performance, customer locations, product attributes, and most importantly, customer reviews.
 
 The goal of my project is to forecast the customer satisfaction score for future orders based on these multifaceted features. To achieve this in a real-world scenario, I've employed [ZenML](https://zenml.io/), an innovative tool to create a production-ready pipeline for predicting these satisfaction scores. This repository serves as a demonstration of how [ZenML](https://github.com/zenml-io/zenml), in combination with [MLflow](https://mlflow.org/), can be leveraged to build and deploy efficient and scalable machine learning pipelines.
@@ -10,7 +20,7 @@ Through this project, I aim to showcase:
 - The integration of MLflow for streamlined deployment and effective tracking of machine learning models.
 - The ease and efficiency of building and deploying machine learning pipelines to handle real-world data and scenarios.
 
-## Setting Up the Python Environment for My Project
+# Setting Up the Python Environment <a id="setting-up-the-python-environment"></a>
 
 To embark on this journey of predictive modeling in e-commerce, I started by setting up the necessary Python environment. I cloned the ZenML repository and installed all the required Python packages. This foundational step was crucial in preparing my workspace for the tasks ahead.
 
@@ -24,7 +34,7 @@ Configuring the ZenML stack with MLflow components was a straightforward process
 
 Through these steps, I've established a robust environment tailored to the needs of my project, leveraging the power of ZenML and MLflow to build a scalable and efficient machine learning workflow.
 
-## :thumbsup: My Solution for Predicting Customer Satisfaction
+# Solution Overview <a id="solution-overview"></a>
 
 In my pursuit to build a practical workflow for predicting customer satisfaction scores, I realized that merely training a model once wouldn't suffice. Instead, I've developed an end-to-end pipeline that not only predicts but also continuously updates and deploys the machine learning model. This approach ensures that the business can utilize the latest model for informed decision-making.
 
@@ -32,7 +42,7 @@ This pipeline, designed to be flexible and scalable, can be deployed to the clou
 
 In this project, I've placed particular emphasis on the [MLflow integration](https://github.com/zenml-io/zenml/tree/main/examples) within ZenML. Utilizing MLflow, I've managed to track key metrics and parameters effectively, and its deployment capabilities allowed for seamless model implementation. Moreover, I've incorporated [Streamlit](https://streamlit.io/) to demonstrate the real-world application of the model, offering a glimpse into how it can be utilized in a business context.
 
-### Training Pipeline
+### Training Pipeline <a id="training-pipeline"></a>
 
 The training pipeline I've designed encompasses several critical steps:
 
@@ -41,7 +51,7 @@ The training pipeline I've designed encompasses several critical steps:
 - `train_model`: Focuses on training the model, with MLflow autologging used for saving.
 - `evaluation`: Evaluates the model and logs metrics using MLflow autologging.
 
-### Deployment Pipeline
+### Deployment Pipeline <a id="deployment-pipeline"></a>
 
 Beyond the standard training, I've crafted a `deployment_pipeline.py` that extends the initial process. This pipeline not only processes and trains the model but also deploys it as a prediction server, subject to meeting predefined evaluation criteria. This criteria, based on the [MSE](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html), ensures only high-performing models are deployed.
 
@@ -61,7 +71,7 @@ service.predict(...)  # Predict on incoming data from the application
 
 While this ZenML Project trains and deploys a model locally, other ZenML integrations such as the [Seldon](https://github.com/zenml-io/zenml/tree/main/examples/seldon_deployment) deployer can also be used in a similar manner to deploy the model in a more production setting (such as on a Kubernetes cluster). We use MLflow here for the convenience of its local deployment.
 
-## :notebook: Diving into the code
+# Diving into the Code <a id="diving-into-the-code"></a>
 
 You can run two pipelines as follows:
 
