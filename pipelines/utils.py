@@ -1,7 +1,7 @@
 import logging
 
 import pandas as pd
-from src.data_cleaning import DataCleaning, DataPreprocessStrategy
+from model.data_cleaning import DataCleaning, DataPreprocessStrategy
 
 
 def get_data_for_test():

@@ -2,7 +2,7 @@ import logging
 from typing import Tuple
 
 import pandas as pd
-from src.data_cleaning import (
+from model.data_cleaning import (
     DataCleaning,
     DataDivideStrategy,
     DataPreprocessStrategy,

@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 import pandas as pd
-# from materializer.custom_materializer import cs_materializer
+from materializer.custom_materializer import cs_materializer
 from steps.clean_data import clean_data
 from steps.evaluation import evaluation
 from steps.ingest_data import ingest_data
@@ -121,36 +121,36 @@ def prediction_service_loader(
     return existing_services[0]
 
 
-# @step
-# def predictor(
-#     service: MLFlowDeploymentService,
-#     data: np.ndarray,
-# ) -> np.ndarray:
-#     """Run an inference request against a prediction service"""
+@step
+def predictor(
+    service: MLFlowDeploymentService,
+    data: np.ndarray,
+) -> np.ndarray:
+    """Run an inference request against a prediction service"""
 
-#     service.start(timeout=10)  # should be a NOP if already started
-#     data = json.loads(data)
-#     data.pop("columns")
-#     data.pop("index")
-#     columns_for_df = [
-#         "payment_sequential",
-#         "payment_installments",
-#         "payment_value",
-#         "price",
-#         "freight_value",
-#         "product_name_lenght",
-#         "product_description_lenght",
-#         "product_photos_qty",
-#         "product_weight_g",
-#         "product_length_cm",
-#         "product_height_cm",
-#         "product_width_cm",
-#     ]
-#     df = pd.DataFrame(data["data"], columns=columns_for_df)
-#     json_list = json.loads(json.dumps(list(df.T.to_dict().values())))
-#     data = np.array(json_list)
-#     prediction = service.predict(data)
-#     return prediction
+    service.start(timeout=10)  # should be a NOP if already started
+    data = json.loads(data)
+    data.pop("columns")
+    data.pop("index")
+    columns_for_df = [
+        "payment_sequential",
+        "payment_installments",
+        "payment_value",
+        "price",
+        "freight_value",
+        "product_name_lenght",
+        "product_description_lenght",
+        "product_photos_qty",
+        "product_weight_g",
+        "product_length_cm",
+        "product_height_cm",
+        "product_width_cm",
+    ]
+    df = pd.DataFrame(data["data"], columns=columns_for_df)
+    json_list = json.loads(json.dumps(list(df.T.to_dict().values())))
+    data = np.array(json_list)
+    prediction = service.predict(data)
+    return prediction
 
 
 @step
