@@ -68,8 +68,7 @@ In my pursuit to build a practical workflow for predicting customer satisfaction
 
 This pipeline, designed to be flexible and scalable, can be deployed to the cloud and adapted according to the project's evolving needs. It meticulously tracks every aspect of the process, from raw data inputs to the model parameters and prediction outputs, ensuring comprehensive monitoring and analysis.
 
-In this project, I've placed particular emphasis on the [MLflow integration](https://github.com/zenml-io/zenml/tree/main/examples) within ZenML. Utilizing MLflow, I've managed to track key metrics and parameters effectively, and its deployment capabilities allowed for seamless model implementation. Moreover, I've incorporated [Streamlit](https://streamlit.io/) to demonstrate the real-world application of the model, offering a glimpse into how it can be utilized in a business context.
-
+In this project, I've placed particular emphasis on the [MLflow integration](https://github.com/zenml-io/zenml/tree/main/examples) within ZenML. Utilizing MLflow, I've managed to track key metrics and parameters effectively, and its deployment capabilities allowed for seamless model implementation.
 ### Training Pipeline <a id="training-pipeline"></a>
 
 The training pipeline I've designed encompasses several critical steps:
